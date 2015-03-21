@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,8 +51,9 @@ public class TextModel implements Model {
 		String blogTitle = blogFileName.replace(".txt", "");
 		b.setTitle(blogTitle);
 		try {
-			FileTime modifiedDate = Files.getLastModifiedTime(p);
-			Date date = new Date(modifiedDate.toMillis());
+			BasicFileAttributes attr = Files.readAttributes(p, BasicFileAttributes.class);
+			FileTime createdDate = attr.creationTime();
+			Date date = new Date(createdDate.toMillis());
 			List<String> contents = Files.readAllLines(p, Charset.defaultCharset());
 			b.setDate(date);
 			b.setContents(contents);

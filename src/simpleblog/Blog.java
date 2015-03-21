@@ -3,7 +3,7 @@ package simpleblog;
 import java.util.Date;
 import java.util.List;
 
-public class Blog implements Comparable{
+public class Blog implements Comparable<Blog>{
 	private String title;
 	private List<String> contents;
 	private Date date;
@@ -40,13 +40,8 @@ public class Blog implements Comparable{
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		if (!(o instanceof Blog)) {
-			return -1;
-		}
-		Blog b = (Blog) o;
-		
-		return 0 - this.date.compareTo(b.getDate());
+	public int compareTo(Blog o) {
+		return 0 - this.date.compareTo(o.getDate());
 	}
 	
 	

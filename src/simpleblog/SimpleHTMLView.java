@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class SimpleHTMLView implements View {
@@ -22,7 +23,6 @@ public class SimpleHTMLView implements View {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void writeSite(String outputDirectory, List<Blog> blogs) {
 		
@@ -40,12 +40,15 @@ public class SimpleHTMLView implements View {
 			}
 		}
 		
+		Date lastRun = new Date(System.currentTimeMillis());
+		
 		index.add("<html>");
 		index.add("<head>");
 		index.add("<title>MyBlog</title>");
 		index.add("</head>");
 		index.add("<body>");
 		index.addAll(listOfBlogs);
+		index.add("<p><small>Last Run: "+ lastRun +"</small></p>");
 		index.add("</body>");
 		index.add("</html>");
 		Path p = FileSystems.getDefault().getPath(outputDirectory,"index.html");

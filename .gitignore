@@ -1,4 +1,4 @@
-.html
+*.html
 .DS_Store
 */output
 .classpath
